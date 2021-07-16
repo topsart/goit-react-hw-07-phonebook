@@ -10,17 +10,12 @@ import {
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
 
-const myMiddleware = store => next => action => {
-  next(action);
-};
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  myMiddleware,
   logger,
 ];
 
@@ -31,7 +26,5 @@ const store = configureStore({
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
-
-// let persistor = persistStore(store);
 
 export default store;
