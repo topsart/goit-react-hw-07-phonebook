@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import contactsOperations from '../../redux/contacts/contacts-operations';
+import { contactsOperations } from '../../redux/contacts';
 import shortid from 'shortid';
 import styles from './Form.module.css';
 

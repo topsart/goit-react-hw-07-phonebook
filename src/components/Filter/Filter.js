@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as contactsActions from '../../redux/contacts/contacts-actions';
 import styles from './Filter.module.css';
 import shortid from 'shortid';
+import { contactsSelectors, changeFilter } from '../../redux/contacts';
 
 const nameInputId = shortid.generate();
 
@@ -23,11 +23,11 @@ const Filter = ({ value, onChange }) => (
 );
 
 const mapStateToProps = state => ({
-  value: state.contacts.filter,
+  value: contactsSelectors.getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(contactsActions.changeFilter(e.target.value)),
+  onChange: e => dispatch(changeFilter(e.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

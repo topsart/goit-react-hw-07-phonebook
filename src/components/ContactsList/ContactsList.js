@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import contactsOperations from '../../redux/contacts/contacts-operations';
+import { contactsOperations, contactsSelectors } from '../../redux/contacts';
 import styles from './ContactsList.module.css';
 
 const ContactsList = ({ contacts, onDeleteContact }) => (
@@ -20,16 +20,8 @@ const ContactsList = ({ contacts, onDeleteContact }) => (
   </ul>
 );
 
-const getFilteredContacts = (allContacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
-
-  return allContacts.filter(({ name }) =>
-    name.toLowerCase().includes(normalizedFilter),
-  );
-};
-
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  contacts: getFilteredContacts(items, filter),
+const mapStateToProps = state => ({
+  contacts: contactsSelectors.getFilteredContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
